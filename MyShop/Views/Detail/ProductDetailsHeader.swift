@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ProductDetailsHeader: View {
-    let product : Product
+    @EnvironmentObject var shop : Shop
     @State var isAnimating : Bool = false
     var body: some View {
         VStack(alignment: .leading){
             
-            Text(product.name)
+            Text(shop.selectedProduct?.name ?? "Helmet")
                 .font(.title)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .foregroundStyle(.white)
@@ -21,13 +21,13 @@ struct ProductDetailsHeader: View {
                 VStack(alignment: .leading){
                     Text("Price")
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text(product.formattedPrice)
+                    Text(shop.selectedProduct?.formattedPrice ?? "$0.0")
                         .font(.system(size: 50))
                         .fontWeight(.black)
                 }//: VStack
                 .padding(.top, 20)
                 .offset(y: isAnimating ? 0 : -25)
-                Image(product.image)
+                Image(shop.selectedProduct?.image ?? "helmet-placeholder")
                     .resizable()
                     .scaledToFit()
                     .offset(CGSize(width: 0, height: isAnimating ? 0 : -50))
@@ -42,5 +42,6 @@ struct ProductDetailsHeader: View {
 }
 
 #Preview {
-    ProductDetailsHeader(product: products[0])
+    ProductDetailsHeader()
+        .environmentObject(Shop())
 }

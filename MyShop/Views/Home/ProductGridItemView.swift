@@ -9,11 +9,16 @@ import SwiftUI
 
 struct ProductGridItemView: View {
     let product : Product
+    @EnvironmentObject var shop : Shop
     var body: some View {
         
             VStack(  alignment: .leading, spacing: 5 ){
-                Button {
-                } label : {
+                Button{
+                    mediumFeedback.impactOccurred()
+                    withAnimation(.easeOut){
+                        shop.selectedProduct = product
+                    }
+                } label :{
                     Image(product.image)
                         .resizable()
                         .scaledToFit()
@@ -40,5 +45,6 @@ struct ProductGridItemView: View {
 
 #Preview {
     ProductGridItemView(product: products[0])
+//        .environmentObject(Shop())
         .padding()
 }

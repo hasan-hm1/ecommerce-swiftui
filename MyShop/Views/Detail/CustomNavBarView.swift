@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct CustomNavBarView: View {
+    @EnvironmentObject var shop : Shop
     var body: some View {
         HStack{
             Button{
-                
+               
+                withAnimation(.easeOut){
+                    shop.selectedProduct = nil
+                }
             }label: {
                 Image(systemName: "chevron.left")
             }

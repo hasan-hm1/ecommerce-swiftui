@@ -14,6 +14,7 @@ let categories : [Category] = Bundle.main.decode("category.json")
 let products : [Product] = Bundle.main.decode("product.json")
 let brands : [Brand] = Bundle.main.decode("brand.json")
 let sizes : [String] = ["XS", "S" , "M" , "L" , "XL"]
+ 
 
 // Colors
 let colorBackground : Color = .colorBackground
@@ -28,3 +29,6 @@ let categoriesGridLayout : [GridItem] = Array(repeating: .init(.flexible(), spac
 let productsGridLayout : [GridItem] = Array(repeating: .init(.flexible(),spacing: 10, alignment: .center), count: 2)
 let brandsGridLayout : [GridItem] = Array(repeating: .init(.fixed(100)), count: 2)
 
+// UX
+
+let mediumFeedback = UIImpactFeedbackGenerator(style : .medium)

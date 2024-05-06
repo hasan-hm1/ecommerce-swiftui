@@ -12,37 +12,37 @@ struct CounterAndFavoriteView: View {
     var body: some View {
         HStack{
             HStack(spacing: 10.0){
-                Button{
+                Button{ mediumFeedback.impactOccurred()
                     if count > 0 {
                         count -= 1
                     }
                 }label: {
                     Image(systemName: "minus.circle")
-
+                    
                 }
                 Text("\(count)")
-                    .frame(width: 40)
-                Button{
+                    .frame(minWidth: 32)
+                Button{ mediumFeedback.impactOccurred()
                     count += 1
                 }label: {
                     Image(systemName: "plus.circle")
-               
+                    
                 }
             }//: HStack
-
+            
             .foregroundStyle(.black)
             
             Spacer()
             
             Button{
-                
+                mediumFeedback.impactOccurred()
             }label: {
                 Image(systemName: "heart.circle")
                     .foregroundStyle(.pink)
             }
         }//: HStack
         .imageScale(.large)
-        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+        .font(.system(.title, design: .rounded))
         .fontWeight(.semibold)
     }
 }

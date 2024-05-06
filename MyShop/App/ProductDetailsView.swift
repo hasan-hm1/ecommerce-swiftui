@@ -8,67 +8,61 @@
 import SwiftUI
 
 struct ProductDetailsView: View {
-    let product : Product
+  @EnvironmentObject  var shop : Shop
     @State var isAnimating : Bool = false
     var body: some View {
-        ZStack {
-            // MARK: - Color background
-            product.RGBColor
-            // MARK: - White background
-            GeometryReader { geometry in
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .fill(.white)
-                    .offset(y: geometry.size.height / 3)
-            }
-            
-            // MARK: - Product info
-            VStack(alignment: .leading, spacing: 0.0){
-                CustomNavBarView()
-                
-                VStack(alignment: .leading, spacing: 10){
-                    // MARK: - Header
-                    ProductDetailsHeader(product: product)
-         
-                }//: VStack
+        // MARK: - Product info
+        VStack(alignment: .leading, spacing: 0.0){
+            CustomNavBarView()
+                .padding(.bottom , 20)
+//                .layoutPriority(10)
+                // MARK: - Header
+            ProductDetailsHeader()
                 .padding(.horizontal)
-                .padding(.top,10)
-                
-                ScrollView(.vertical, showsIndicators: false){
-                    // MARK: - Ratings and Sizes
+                .zIndex(1.0)
+            VStack(spacing: 10){
                     RatingsAndSizesView()
-                    // MARK: - Description
-                    Text(product.description)
-                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                    .padding(.top , -20)
+                    .padding(.bottom, 10)
+                ScrollView(.vertical, showsIndicators: false){
+                    Text(shop.selectedProduct?.description ?? "")
+                        .multilineTextAlignment(.leading)
                         .foregroundStyle(.gray)
+                }
+                .padding(0)
                     // MARK: - Counter + fav
                     CounterAndFavoriteView()
-                        .padding(.top, 10)
-                    // MARK: - Add to cart
-                    Button{
-                        
-                    }label: {
-                        Text("Add to cart".uppercased())
-                            .background(RoundedRectangle(cornerRadius: 12)
-                                
-                            )
-                    }
-    //                        .buttonBorderShape(.capsule)
-                    .frame(width: .infinity)
-                }
-                
- 
-                
-                
-                
-                
-            }//: VStack
-            .padding(.top ,UIApplication.shared.windows.first?.safeAreaInsets.top)
-        }.ignoresSafeArea()
+                AddToCartButtonView()
+                    .padding(.bottom, 30)
+                    .padding(.top, 20)
+                }//: VStack
+            .padding(.horizontal)
+                .background(Rectangle()
+                    .fill(.white)
+                    
+                    .clipShape(
+                    .rect(
+                        topLeadingRadius: 25,
+                        bottomLeadingRadius: 0,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 25
+                    )
+                  
+                )
+                        .padding(.top, -100)
+                        .padding(.bottom, -10)
+                )
+           
+        }//: VStack
+        .background(shop.selectedProduct?.RGBColor ?? .pink)
+        .ignoresSafeArea(.all , edges: .bottom)
+        
     }
 }
 
 #Preview {
-    ProductDetailsView(product: products[0])
+    ProductDetailsView()
+         
 }
 
 

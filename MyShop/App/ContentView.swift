@@ -10,47 +10,22 @@ import SwiftUI
 struct ContentView: View {
     
 
-    
+    @EnvironmentObject var shop: Shop
     
     
     var body: some View {
-        VStack(spacing: 10) {
-            NavigationBarView()
-                .padding()
-                .background(.white)
-                .shadow( color: .black.opacity(0.05), radius: 10, x: 0, y: 10)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 20){
-                    ImageCarouselView(players: players)
-                        .frame(height: 250)
-                    
-                    CategoriesGridView()
-                    CategoryTitleView(title: "Helmets")
-                    ProductsGridView()
-                    CategoryTitleView(title: "Brands")
-                    BrandsGridView()
-                    FooterView()
-                        .padding(.horizontal)
-                }
-              
-                
-                
+     
+        VStack {
+            if shop.selectedProduct == nil {
+                HomeView()
+            } else {
+                ProductDetailsView()
             }
-            .padding(.horizontal)
-            
-        
-            
-          
-          
-            
-            
-        }//: VStack
-        
-        .background(colorBackground)
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(Shop())
 }
