@@ -16,6 +16,7 @@ struct ImageCarouselView: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(12)
+                    .padding(.horizontal)
                     .frame(height: 300)
             }
         }
@@ -26,6 +27,6 @@ struct ImageCarouselView: View {
 #Preview {
     
     ImageCarouselView(players: players)
-        .padding()
+      
         .background(.pink)
 }

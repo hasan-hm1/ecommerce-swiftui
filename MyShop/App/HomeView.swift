@@ -19,6 +19,7 @@ struct HomeView: View {
                 VStack(spacing: 20){
                     ImageCarouselView(players: players)
                         .frame(height: 250)
+                        .padding(.horizontal , -12)
                     
                     CategoriesGridView()
                     CategoryTitleView(title: "Helmets")
